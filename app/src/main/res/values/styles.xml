@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyTextStyle" parent="@style/Widget.AppCompat.TextView">
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">@color/orange_200</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:layout_marginLeft">100dp</item>
+        <item name="android:layout_marginRight">100dp</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:backgroundTint">@color/orange_200</item>
+        <item name="backgroundColor">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:imageButtonStyle">@color/black</item>
+
+    </style>
+
+    <style name="RegisterText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/grey_500</item>
+    </style>
+
+    <style name="RegisterNow">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/orange_200</item>
+    </style>
+
+
+    <style name="EditTextStyle" parent="@style/Widget.AppCompat.EditText">
+        <item name="android:bottomMedium">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.MdcTypographyStyles.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">103sp</item>
+    </style>
+
+    <style name="MyCardViewStyle" parent="Theme.AppCompat.Light">
+        <item name="cardCornerRadius">2dp</item>
+        <item name="cardElevation">2dp</item>
+        <item name="cardMaxElevation">4dp</item>
+        <item name="contentPaddingBottom">24dp</item>
+        <item name="contentPaddingTop">0dp</item>
+        <item name="contentPaddingLeft">16dp</item>
+        <item name="contentPaddingRight">16dp</item>
+        <item name="cardBackgroundColor">@color/orange_200</item>
+    </style>
+
+    <style name="chekBoxTask">
+        <item name="android:textSize">20sp</item>
+
+    </style>
+
+    <style name="taskTextView">
+        <item name="android:textSize">25sp</item>
+    </style>
+</resources>

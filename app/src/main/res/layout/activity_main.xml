@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00695c">
+
+
+    <ImageView
+        android:id="@+id/welcomeImg"
+        android:layout_width="match_parent"
+        android:layout_height="600px"
+        android:layout_alignTop="@+id/firstText"
+        android:layout_marginTop="-187dp"
+        android:src="@mipmap/notes_foreground"></ImageView>
+
+    <TextView
+
+        android:id="@+id/firstText"
+        style="@style/MyTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+
+        android:fontFamily="@font/nunito"
+
+        android:gravity="center"
+        android:text="@string/main_screen_text"
+        android:textSize="45sp"
+         />
+
+    <TextView
+        android:id="@+id/wrongTextIfError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="266dp"
+        android:layout_marginEnd="0dp"
+        android:gravity="center"
+        android:text="by Voloshyn Roman"
+        android:textColor="@color/grey_500"
+        android:textSize="25sp" />
+
+
+</RelativeLayout>
