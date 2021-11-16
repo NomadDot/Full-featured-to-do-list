@@ -11,11 +11,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.renderscript.ScriptGroup;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +41,7 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
 
     private static final String TAG = "CARD VIEW TEST";
 
+
     Button btnAddTask;
     LinearLayout taskLayout;
 
@@ -41,7 +50,6 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
     FloatingActionButton btnCreateCardView;
 
     EditText editTask;
-
     LinearLayout mainLayout;
     LinearLayout setTaskLayout;
 
@@ -50,24 +58,27 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
 
     // Bad practice in programming, but I think it's ok for beginner
     // These 3 List<View> are using for unique the every table of plans
-    List<CardView> listOfCardView = new ArrayList<>();;
+    List<CardView> listOfCardView = new ArrayList<>();
     List<LinearLayout> listOfLinearLayout = new ArrayList<>();
     List<Button> listOfButton = new ArrayList<>();
+    List<TextView> listOftextViewHeading = new ArrayList<>();
+    List<EditText> listOfeditTextHeading = new ArrayList<>();
+
+    List<EditText> listOfTasksEditText = new ArrayList<>();
+    List<TextView> listOfTasksTextView = new ArrayList<>();
 
     int id1 = 0;
     int id2 = -1;
     int idCounter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.panner_main_layout);
 
         ctxt = this;
-        BoardView brdView = new BoardView(ctxt);
         mainLayout = findViewById(R.id.main_layout);
 
-       // btnAddTask = findViewById(R.id.btnAddTask);
-        //taskLayout = findViewById(R.id.taskLayout);
         btnCreateCardView = findViewById(R.id.floatButton);
         View.OnClickListener createNewCardView = new View.OnClickListener() {
             @Override
@@ -78,31 +89,84 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
         };
         btnCreateCardView.setOnClickListener(createNewCardView);
 
+
     }
+
+    public void onCheckBoxClicked(View view){
+
+    }
+
+    CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if(isChecked)
+                buttonView.setVisibility(View.INVISIBLE);
+            else {
+
+            }
+        }
+    };
+
+    View.OnClickListener editHeading = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int idOfView = v.getId();
+            TextView textView = listOftextViewHeading.get(idOfView);
+            textView.setVisibility(View.INVISIBLE);
+            EditText editText = listOfeditTextHeading.get(idOfView);
+            editText.setVisibility(View.VISIBLE);
+
+            editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        editText.setVisibility(View.INVISIBLE);
+                        textView.setText(editText.getText().toString());
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    return true;
+                }
+            });
+
+        }
+    };
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
+    TextView.OnEditorActionListener editorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            Log.i(TAG, "IF STATEMENT");
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                Log.i(TAG, "IF WORKED");
+                CheckBox checkBox = createCheckBox(editTask.getText().toString());
+                layoutOfTasks.removeView(editTask);
+                layoutOfTasks.addView(checkBox);
+                layoutOfTasks.addView(listOfButton.get(idCounter));
+                Log.i(TAG, "VIEW CREATED");
+            }
+            return true;
+        }
+    };
 
     @Override
     public void onClick(View v) {
-        int idOfView = v.getId();
-
+         idCounter= v.getId();
 
         try {
-            if(idOfView >= 0) {
-                CardView cardView = listOfCardView.get(idOfView);
-                idCounter = idOfView;
-                layoutOfTasks = listOfLinearLayout.get(idOfView);
-                layoutOfTasks.removeView(listOfButton.get(idOfView));
-                setTaskLayout = createTaskLayout();
-                layoutOfTasks.addView(setTaskLayout);
-
+            if(idCounter >= 0) {
+                CardView cardView = listOfCardView.get(idCounter);
+                layoutOfTasks = listOfLinearLayout.get(idCounter);
+                layoutOfTasks.removeView(listOfButton.get(idCounter));
+                EditText editTextToCreateTask = createEditText();
+                editTextToCreateTask.setOnEditorActionListener(editorActionListener);
+                layoutOfTasks.addView(editTextToCreateTask);
             }
 
-            if(idOfView < 0) {
+            if(idCounter < 0) {
                 CheckBox checkBox = createCheckBox(editTask.getText().toString());
                 layoutOfTasks.removeView(setTaskLayout);
                 layoutOfTasks.addView(checkBox);
@@ -131,34 +195,21 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
     }
 
     // These funcs are only for creating tasks in CardView
-    LinearLayout createTaskLayout(){
-        LinearLayout linearLayout = new LinearLayout(this);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
-        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        linearLayout.setLayoutParams(params);
 
-        EditText editText = createEditText();
-        Button button = createButton();
-
-        linearLayout.addView(editText);
-        linearLayout.addView(button);
-
-        return linearLayout;
-    }
 
     EditText createEditText(){
         EditText editText = new EditText(this);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT);
         params.setMarginStart(140);
         params.setMarginEnd(10);
-        params.weight = 1;
+
         editText.setLayoutParams(params);
         editText.setTextSize(25);
 
         editText.setId(id2);
-
+        editText.setInputType(InputType.TYPE_CLASS_TEXT);
         editTask = editText;
-
+        listOfTasksEditText.add(editText);
         return editText;
     }
 
@@ -186,6 +237,7 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
 
         checkBox.setLayoutParams(params);
         checkBox.setText(text);
+        checkBox.setOnCheckedChangeListener(checkedChangeListener);
         return checkBox;
     }
 
@@ -198,10 +250,32 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
         txtHeading.setGravity(CENTER);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(MATCH_PARENT, 100);
-
+        txtHeading.setId(id1);
         txtHeading.setLayoutParams(params);
 
+        txtHeading.setOnClickListener(editHeading);
+        listOftextViewHeading.add(txtHeading);
+
         return txtHeading;
+    }
+
+    EditText setHeading() {
+        EditText editText = new EditText(this);
+
+        editText.setTextSize(30);
+        editText.setTextColor(ColorStateList.valueOf(Color.parseColor("#FF000000")));
+        editText.setGravity(CENTER);
+        editText.setVisibility(View.INVISIBLE);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(MATCH_PARENT, 120);
+        params.setMarginStart(25);
+        params.setMarginEnd(25);
+
+        editText.setLayoutParams(params);
+        editText.addTextChangedListener(headingWatcher);
+        editText.setInputType(InputType.TYPE_CLASS_TEXT);
+        listOfeditTextHeading.add(editText);
+        return editText;
     }
 
     View createGreyLine() {
@@ -246,6 +320,8 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
 
         Log.i(TAG, "Call method headingOfCardView");
         TextView headingOfCardView = createHeading("test heading");
+        Log.i(TAG, "Call metdhod setHeading");
+        EditText setHeadingOfText = setHeading();
         Log.i(TAG, "Call method createGreyLine");
         View greyLine = createGreyLine();
         Log.i(TAG, "Call method createLinearLayout");
@@ -254,6 +330,7 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
         cardView.setLayoutParams(params);
 
         Log.i(TAG, "Adding views");
+        cardView.addView(setHeadingOfText);
         cardView.addView(headingOfCardView);
         cardView.addView(greyLine);
         cardView.addView(linearLayout);
@@ -262,6 +339,24 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
         return cardView;
 
     }
+
+
+    TextWatcher headingWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 }
 
 
