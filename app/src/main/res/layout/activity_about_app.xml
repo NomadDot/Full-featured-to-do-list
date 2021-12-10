@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawerLayoutAbout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/VIEW"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity=""
+        android:background="#1976d2">
+
+    </View>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/imbButtonAbout"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="33dp"
+            android:backgroundTint="#1976d2"
+            android:src="@mipmap/hamburger_menu_foreground" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:layout_height="70dp"
+            android:layout_alignTop="@+id/cardView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="-72dp"
+            android:layout_marginEnd="-7dp"
+            android:text="About this app"
+            android:textColor="@color/white"/>
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_marginTop="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="50dp"
+            android:elevation="0dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:id="@+id/mainView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="83dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:src="@mipmap/code_syntax_foreground"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp" />
+
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hi, I'm Roman! \n It's my first built app for planning.\n\n I was inspired by channel 'devaslife' and created it for portfolio as a pet project."
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    />
+
+
+                <Button
+                    android:id="@+id/telegramButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:backgroundTint="#29b6f6"
+                    android:textColor="@color/white"
+                    android:text="Telegram"/>
+                <Button
+                    android:id="@+id/instaButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="60dp"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="60dp"
+                    android:backgroundTint="#0d47a1"
+                    android:text="Linkedin"/>
+                <Button
+                android:id="@+id/githubButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:backgroundTint="@color/black"
+                    android:textColor="@color/white"
+                android:text="github"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationViewR"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_drawer_menu"
+        android:layout_gravity="start"
+        style="@style/NavigationViewPadding"
+        android:background="@color/white"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_marginTop="160dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <Button
+                android:backgroundTint="@color/white"
+                android:id="@+id/tasksItemAboutApp"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:gravity="center"
+                android:textColor="#1976d2"
+                android:text="Tasks" />
+            <Button
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#1976d2"
+                android:textColor="@color/white"
+                android:id="@+id/aboutItemAboutApp"
+                android:layout_width="match_parent"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="About" />
+
+        </LinearLayout>
+
+
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>

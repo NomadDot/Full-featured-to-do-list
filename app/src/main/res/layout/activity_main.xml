@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00695c">
+    android:background="@color/mainTheme">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,47 +11,39 @@
         android:orientation="vertical"
         android:id="@+id/layoutMain">
 
-    <ImageView
-        android:layout_marginStart="30dp"
-        android:id="@+id/welcomeImg"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-
-        android:src="@mipmap/notes_foreground">
-    </ImageView>
-
-    <TextView
-
-        android:id="@+id/firstText"
-        style="@style/MyTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-
-        android:fontFamily="@font/nunito"
-
-        android:gravity="center"
-        android:text="@string/main_screen_text"
-        android:textSize="45sp"
-         />
     </LinearLayout>
 
     <TextView
 
         android:id="@+id/wrongTextIfError"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
+        android:layout_height="match_parent"
+
         android:layout_below="@id/layoutMain"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="266dp"
-        android:layout_marginEnd="0dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="400dp"
         android:gravity="center"
         android:text="by Voloshyn Roman"
-        android:textColor="@color/grey_500"
+        android:textColor="#D7CCC8"
         android:textSize="25sp" />
+
+    <TextView
+
+        android:id="@+id/firstText"
+        style="@style/MyTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+
+        android:layout_alignTop="@+id/layoutMain"
+
+        android:layout_centerInParent="true"
+
+        android:fontFamily="@font/nunito"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="@string/main_screen_text"
+        android:textSize="45sp" />
 
 
 </RelativeLayout>
