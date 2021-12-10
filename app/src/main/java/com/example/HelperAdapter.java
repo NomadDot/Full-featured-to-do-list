@@ -58,7 +58,6 @@ public class HelperAdapter extends RecyclerView.Adapter<MyViewClass> implements 
     }
 
 
-
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull MyViewClass holder, int position) {
@@ -111,16 +110,12 @@ public class HelperAdapter extends RecyclerView.Adapter<MyViewClass> implements 
         writtingAndReading.deleteTask(removedItem);
         tasks.remove(position);
         notifyItemRemoved(position);
-
     }
 
     @Override
     public void setContext(Context context) {
         this.context = context;
     }
-
-
-
 
 }
 

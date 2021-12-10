@@ -209,16 +209,6 @@ public class PannerMainLayoutActivity extends AppCompatActivity implements View.
         }catch (Exception e) {}
     }
 
-    CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if(isChecked) {
-
-
-            }
-        }
-    };
-
     TextView.OnEditorActionListener editCheckBoxActionListener = new TextView.OnEditorActionListener() {
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
